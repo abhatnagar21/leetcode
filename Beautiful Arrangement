@@ -1,0 +1,32 @@
+class Solution {
+public:
+   vector<int> dp;
+    int count(int mask,int i,int n){
+        if(i==n)return 1;
+//         check if values for the same mask is previously calculated or not
+        if(dp[mask]!=-1)return dp[mask];
+        int ans=0;
+        for(int j=1;j<=n;j++){
+//             check if (j-1)th index bit (represents number j) is available to take
+//             if available check does it satisfy the condition
+            if((mask &(1<<(j-1))) and (j%(i+1)==0 or (i+1)%j==0)){
+//                 available to take;
+                mask=mask ^ (1<<(j-1));
+//                 new set bits -->represents which numbers we can take
+                ans+=count(mask,i+1,n);
+//                 backtrack and check for others 
+                mask=mask ^ (1<<(j-1));
+            }
+        }
+//         return and sotre the answer for the same mask
+        return dp[mask]=ans;
+    }
+    int countArrangement(int n) {
+        vector<int> v(n,0);
+        int mask=1<<n;dp.resize(mask,-1);
+        mask--;
+//         now all values are available to take
+        return count(mask,0,n); {
+        
+    }}
+};
