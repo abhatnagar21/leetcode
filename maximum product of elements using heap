@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+       priority_queue<int> maxi;
+       for(int i:nums)
+       {
+           
+           maxi.push(i);
+       }
+       int w=maxi.top();
+       maxi.pop();
+       int t=maxi.top();
+       return(w-1)*(t-1);
+    }
+};
