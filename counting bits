@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> countBits(int n) {
+  vector<int> dp(n + 1, 0);  // Initialize dp with 0s
+  int offset = 1;
+
+  for (int i = 1; i <= n; i++) {  // Iterate from 1 to n (inclusive)
+    if (offset * 2 == i) {
+      offset = i;
+    }
+    dp[i] = dp[i - offset] + 1;  // Add 1 to account for the extra set bit
+  }
+
+  return dp;
+}
+};
