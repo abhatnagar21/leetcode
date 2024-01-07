@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int numberOfSteps(int n) {
+        int count=0;
+        if(n==0)return count;
+        while(n!=0)
+        {
+            if(n%2==0)//even condition
+            {
+                   n=n>>1;
+                   count++;
+            }
+            else{//odd condition
+                n=n-1;
+                count++;
+            }
+        }
+        return count;
+    }
+};
