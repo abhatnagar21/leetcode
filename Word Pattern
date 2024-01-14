@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+    unordered_map<char, string> charToWord;
+    unordered_map<string, char> wordToChar;
+
+    istringstream ss(s);
+    string word;
+    int i = 0;
+
+    while (ss >> word) {
+        if (i >= pattern.size()) {
+            // More words than characters in the pattern
+            return false;
+        }
+
+        char currentChar = pattern[i];
+
+        if (charToWord.find(currentChar) == charToWord.end() && wordToChar.find(word) == wordToChar.end()) {
+            // If the current character and word are not in the maps, add them
+            charToWord[currentChar] = word;
+            wordToChar[word] = currentChar;
+        } else {
+            // Check if the mappings are consistent
+            if (charToWord[currentChar] != word || wordToChar[word] != currentChar) {
+                return false;
+            }
+        }
+
+        i++;
+    }
+
+    // Check if the pattern and string have the same length
+    return i == pattern.size();
+}
+};
